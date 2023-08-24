@@ -8,3 +8,7 @@ mod n20_is_valid;
 mod n35_search_insert;
 mod n37_solve_sudoku;
 mod n70_climb_stairs;
+mod n88_merge;
+mod n167_two_num_sum;
+mod n345_reverse_vowels;
+mod n633_judge_square_sum;
