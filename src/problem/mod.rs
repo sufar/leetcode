@@ -12,3 +12,4 @@ mod n88_merge;
 mod n167_two_num_sum;
 mod n345_reverse_vowels;
 mod n633_judge_square_sum;
+mod n680_valid_palindrome;

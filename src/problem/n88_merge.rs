@@ -53,6 +53,7 @@ impl Solution {
         while len >= 0 {
             if n1 < 0 {
                 nums1[len as usize] = nums2[n2 as usize];
+                n2 -= 1;
             } else if n2 < 0 {
             } else if nums1[n1 as usize] > nums2[n2 as usize] {
                 nums1[len as usize] = nums1[n1 as usize];
@@ -79,5 +80,15 @@ mod tests {
         let n = 3;
         Solution::merge(&mut nums1, m, &mut nums2, n);
         assert_eq!(vec![1, 2, 2, 3, 5, 6], nums1);
+    }
+
+    #[test]
+    fn test2() {
+        let mut nums1 = vec![4, 5, 6, 0, 0, 0];
+        let m = 3;
+        let mut nums2 = vec![1, 2, 3];
+        let n = 3;
+        Solution::merge(&mut nums1, m, &mut nums2, n);
+        assert_eq!(vec![1, 2, 3, 4, 5, 6], nums1);
     }
 }
