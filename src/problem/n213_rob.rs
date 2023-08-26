@@ -2,16 +2,17 @@ struct Solution {}
 
 impl Solution {
     pub fn rob(nums: Vec<i32>) -> i32 {
+        // 动态规划，环形n-2,n-1比较
         let size = nums.len();
         if size == 0 {
             return 0;
         }
         if size == 1 {
-            return nums[1];
+            return nums[0];
         }
 
         let s1 = Solution::rob2(&nums, 0, size - 2);
-        let s2 = Solution::rob2(&nums, 0, size - 1);
+        let s2 = Solution::rob2(&nums, 1, size - 1);
         return s1.max(s2);
 
     }
