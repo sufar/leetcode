@@ -6,7 +6,7 @@
 //
 // 在构造过程中，请注意 区分大小写 。比如 "Aa" 不能当做一个回文字符串。
 //
-//  
+//
 //
 // 示例 1:
 //
@@ -22,7 +22,7 @@
 //
 // 输入:s = "aaaaaccc"
 // 输出:7
-//  
+//
 //
 // 提示:
 //
@@ -33,13 +33,11 @@ struct Solution {}
 
 impl Solution {
     pub fn longest_palindrome(s: String) -> i32 {
-
-        let mut buffer = [0i32, 52];
+        let mut buffer = [0i32; 52];
         let mut chs = s.chars();
-        let length = s.len();
         while let Some(ch) = chs.next() {
             if ch >= 'a' && ch <= 'z' {
-                let index = ch as u32 - 'A' as u32;
+                let index = ch as u32 - 6 - 'A' as u32;
                 buffer[index as usize] = buffer[index as usize] + 1;
             } else if ch >= 'A' && ch <= 'Z' {
                 let index = ch as u32 - 'A' as u32;
@@ -48,13 +46,25 @@ impl Solution {
                 continue;
             }
         }
-        if length % 2 == 0 {
-            let mut result = 0;
-            for item in buffer {
-                result = result + item;
+        let mut result = 0;
+        let mut middle = false;
+        for item in buffer {
+            if item / 2 > 0 {
+                if item % 2 == 0 {
+                    result = result + item;
+                } else {
+                    result = result + item - 1;
+                }
+            }
+
+            if item % 2 == 1 {
+                middle = true;
             }
         }
-        return 0;
+        if middle {
+            result = result + 1;
+        }
+        return result;
     }
 }
 
@@ -65,6 +75,12 @@ mod tests {
 
     #[test]
     fn test() {
-        println!("a: {}, z: {}, A: {}, Z: {}", 'a' as u32, 'z' as u32, 'A' as u32, 'Z' as u32);
+        println!(
+            "a: {}, z: {}, A: {}, Z: {}",
+            'a' as u32, 'z' as u32, 'A' as u32, 'Z' as u32
+        );
+
+        let s = "aaaaaccc".to_string();
+        assert_eq!(Solution::longest_palindrome(s), 7);
     }
 }
