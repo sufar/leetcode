@@ -12,6 +12,7 @@ mod n88_merge;
 mod n167_two_num_sum;
 mod n198_rob;
 mod n213_rob;
+mod n242_is_anagram;
 mod n345_reverse_vowels;
 mod n455_find_content_children;
 mod n633_judge_square_sum;

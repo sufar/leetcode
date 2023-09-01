@@ -21,7 +21,7 @@ public class n2_addTwoNumbers {
         }
     }
 
-    public static class Solution {
+    class Solution {
         public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
             ListNode pre = new ListNode(0); // 指向头节点
             ListNode cur = pre;// 当前节点
