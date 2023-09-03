@@ -32,7 +32,27 @@
 struct Solution {}
 
 impl Solution {
+    // 使用长度为 256 的整型数组来统计每个字符出现的个数，每个字符有偶数个可以用来构成回文字符串。
+    // 因为回文字符串最中间的那个字符可以单独出现，所以如果有单独的字符就把它放到最中间。
     pub fn longest_palindrome(s: String) -> i32 {
+        let mut buffer = [0u32; 256];
+        for c in s.chars() {
+            buffer[c as usize] = buffer[c as usize] + 1;
+        }
+        let mut num = 0u32;
+        for i in buffer {
+            if i == 0 {continue};
+            num += (i / 2) * 2;
+        }
+        if num < s.len() as u32 {
+            num += 1;
+        }
+        return num as i32;
+    }
+
+
+    // 这个是我自己想出来的
+    pub fn longest_palindrome2(s: String) -> i32 {
         let mut buffer = [0i32; 52];
         let mut chs = s.chars();
         while let Some(ch) = chs.next() {
