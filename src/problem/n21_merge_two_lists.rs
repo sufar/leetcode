@@ -20,35 +20,28 @@ struct Solution {}
 
 impl Solution {
 
+    // rust迭代实现
     pub fn merge_two_lists(
         list1: Option<Box<ListNode>>,
         list2: Option<Box<ListNode>>,
     ) -> Option<Box<ListNode>> {
-        let (mut l1, mut l2) = (list1, list2);
-        let mut result: Box<ListNode> = Box::new(ListNode::new(0));
+        let mut head: Box<ListNode> = Box::new(ListNode::new(0));
+        let (mut l1, mut l2, mut cur) = (list1, list2, head.as_mut());
 
-        while l1.is_some() || l2.is_some() {
-            if let Some(x) = l1 {
-                if let Some(y) = l2 {
-                    if x.val < y.val {
-                        result.next = Some(Box::new(ListNode::new(x.val)));
-                        l1 = x.next;
-                    } else {
-                        result.next = Some(Box::new(ListNode::new(y.val)));
-                        l2 = y.next;
-                    }
-                } else {
-                    result.next = Some(Box::new(ListNode::new(x.val)));
-                    l1 = x.next;
-                }
+        while l1.is_some() && l2.is_some() {
+            let (p1, p2) = (l1.as_mut().unwrap(), l2.as_mut().unwrap());
+            if p1.val < p2.val {
+                cur.next = Some(Box::new(ListNode::new(p1.val)));
+                l1 = p1.next.take();
             } else {
-                if let Some(x) = l2 {
-                    result.next = Some(Box::new(ListNode::new(x.val)));
-                    l2 = x.next;
-                }
+                cur.next = Some(Box::new(ListNode::new(p2.val)));
+                l2 = p2.next.take();
             }
+            cur = cur.next.as_mut().unwrap();
         }
 
-        return result.next;
+        cur.next = l1.or(l2);
+
+        return head.next;
     }
 }
